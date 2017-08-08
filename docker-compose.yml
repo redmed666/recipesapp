@@ -1,0 +1,35 @@
+version: '2'
+services:
+    recipesclient:
+        image: "redmed/recipesclient:v5"
+        ports:
+            - "4200:4200"
+        links:
+            - "recipesapi:recipesapi"
+
+    recipesapi:
+        image: "redmed/recipesapi:v2"
+        ports:
+            - "3005:3005"
+        volumes:
+            - recipespdf:/app/public/recettes
+
+    dbrecipes:
+        image: "mongo:latest"
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongodbrecipes:/recipescsv:nocopy
+
+volumes:
+    mongodbrecipes:
+        driver: rancher-nfs
+        driver_opts:
+          host: 192.168.10.24
+          export: /nfsregistry/mongodb_recettes/Classement_recettes_modif
+
+    recipespdf:
+        driver: rancher-nfs
+        driver_opts:
+          host: 192.168.10.24
+          export: /nfsregistry/recettes_pdf

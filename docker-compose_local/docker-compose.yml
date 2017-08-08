@@ -1,0 +1,22 @@
+version: '2'
+services:
+    recipesclient:
+        image: "redmed/recipesclient:v5"
+        ports:
+            - "4200:4200"
+        links:
+            - "recipesapi:recipesapi"
+
+    recipesapi:
+        image: "redmed/recipesapi:v2"
+        ports:
+            - "3005:3005"
+        volumes:
+            - /Users/mehdikhemir/Documentsrecettes_pdf:/app/public/recettes
+
+    dbrecipes:
+        image: "mongo:latest"
+        ports:
+            - "27017:27017"
+        volumes:
+            - /Users/mehdikhemir/Documents/mongodb_recettes:/recipescsv
