@@ -1,0 +1,17 @@
+<div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+    Ajouter... <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem" (click)="platSelected = true" (click)="recetteSelected = false"><a class="dropdown-item">Ajouter un plat</a></li>
+    <li role="menuitem" (click)="platSelected = false" (click)="recetteSelected = true"><a class="dropdown-item">Ajouter une recette</a></li>
+  </ul>
+</div>
+
+<div *ngIf="platSelected">
+
+</div>
+
+<div *ngIf="recetteSelected">
+
+</div>

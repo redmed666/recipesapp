@@ -1,0 +1,24 @@
+    <div class="row-fluid">
+        <div class="col-lg-2" id="left">
+            <ul class="plats">
+                <li *ngFor="let plat of plats" [class.selected]="plat === selectedPlat"
+                (click)="onSelectPlat(plat)">
+                    <span class="badge">{{plat.name}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-2" id="right">
+            <div *ngIf="selectedPlat">
+                <li *ngFor="let recette of recettes" [class.selected]="recette === selectedRecette"
+                (click)="onSelectRecette(recette)" (click)="platsCollapsed = false">
+                    <span class="badge">{{recette[1]}}</span>
+                </li>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div *ngIf="selectedRecette">
+                <iframe [src]="recettePath | safe" style="position:fixed; width:65%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+                </iframe>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,10 @@
+<div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+    Rechercher dans <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li *ngFor="let plat of plats" role="menuitem">
+        <a class="dropdown-item">{{plat.name}}</a>
+    </li>
+  </ul>
+</div>
