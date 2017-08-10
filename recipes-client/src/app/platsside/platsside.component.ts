@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Plats } from '../plats';
 import { Recettes } from '../recettes';
 
-import { PlatsService } from '../plats.service' ;
+import { PlatsService } from '../plats.service';
 
 
 @Component({
@@ -14,41 +14,42 @@ import { PlatsService } from '../plats.service' ;
 
 export class PlatssideComponent implements OnInit {
 
-    plats: Plats[];
-    selectedPlat: Plats;
-    selectedRecette: Recettes;
-    recettes: Recettes[];
-    recettePath: string;
+  plats: Plats[];
+  selectedPlat: Plats;
+  selectedRecette: Recettes;
+  recettes: Recettes[];
+  recettePath: string;
+  recetteurl: string = "http://recipesmed.ddns.net:30005/public/";
 
-    constructor(
-        private platsService: PlatsService,
-    ) {}
+  constructor(
+    private platsService: PlatsService,
+  ) { }
 
-    onSelectPlat(plat: Plats): void {
-        this.selectedPlat = plat;
-        this.platsService.getRecettes(plat).then(recettes => this.recettes = recettes);
-    }
+  onSelectPlat(plat: Plats): void {
+    this.selectedPlat = plat;
+    this.platsService.getRecettes(plat).then(recettes => this.recettes = recettes);
+  }
 
-    onSelectRecette(recette: Recettes): void {
-        this.selectedRecette = recette;
-        this.recettePath = "../public/mongodb/" + this.selectedPlat.name + "/" + this.selectedRecette[0] + ".pdf";
-    }
+  onSelectRecette(recette: Recettes): void {
+    this.selectedRecette = recette;
+    this.recettePath = this.recetteurl + this.selectedPlat.name + "/" + this.selectedRecette[0] + ".pdf";
+  }
 
-    getPlats(): void {
-        this.platsService.getPlats().then(plats => this.plats = plats);
-    }
+  getPlats(): void {
+    this.platsService.getPlats().then(plats => this.plats = plats);
+  }
 
-  public platsCollapsed:boolean = true;
+  public platsCollapsed: boolean = true;
 
-  public collapsed(event:any):void {
+  public collapsed(event: any): void {
     console.log(event);
   }
 
-  public expanded(event:any):void {
+  public expanded(event: any): void {
     console.log(event);
   }
 
-  ngOnInit():void {
-      this.getPlats();
+  ngOnInit(): void {
+    this.getPlats();
   }
 }
